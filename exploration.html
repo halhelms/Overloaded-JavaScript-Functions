@@ -1,0 +1,95 @@
+<script type="text/javascript">
+var myFunc = function(name , age, subscribe ){
+	var args = arguments;
+	var expanded_args = "";
+	
+	for ( var i = 0; i < myFunc.length; i++ ) {
+		expanded_args += typeof args[ i ] + '_';
+	};
+	
+	expanded_args = expanded_args.substring( 0, expanded_args.length - 1 );
+	console.log( expanded_args );
+	
+	// overloaded functions
+	var overloaded_functions = function() {
+		
+		return {
+		
+			name_age_subscribe : function() {
+				// name, age, and subscribe were passed in
+				var _name = args[ 0 ];
+				var _age = args[ 1 ];
+				var _subscribe = args[ 2 ];
+				
+				console.log( "Now, I'll do something with these arguments: \n" +
+				"name : " + _name + "\n" +
+				"age : " + _age + "\n" +
+				"subscribe : " + _subscribe );
+			}, 
+
+		
+			name_age : function() {
+				// name and age were passed in
+				var _name = args[ 0 ];
+				var _age = args[ 1 ];
+				
+				console.log( "Now, I'll do something with these arguments: \n" +
+				"name : " + _name + "\n" +
+				"age : " + _age );
+			},
+
+			
+			name_subscribe : function() {
+				// name and subscribe were passed in
+				var _name = args[ 0 ];
+			 	var _subscribe = args[ 1 ];
+			 
+				console.log( "Now, I'll do something with these arguments: \n" +
+			 	"name : " + _name + "\n" +
+			 	"subscribe : " + _subscribe );
+			}, 
+
+			
+			name : function() {
+				var _name = args[ 0 ];
+				
+				console.log( "Now, I'll do something with these arguments: \n" +
+				"name : " + _name );
+			}					
+			
+		} // end return
+	} (); // end overloaded_functions
+
+	
+	switch ( expanded_args ){
+		case 'string_number_boolean' :
+			// all arguments were passed in
+			overloaded_functions.name_age_subscribe();
+			break;
+			
+		case 'string_number_undefined' :
+			// name and age only were passed in
+			overloaded_functions.name_age();
+			break;
+			
+		case 'string_boolean_undefined' :
+			// name and subscribe only were passed in
+			overloaded_functions.name_subscribe();
+			break;
+			
+		case 'string_undefined_undefined' :
+			// name only was passed in
+			overloaded_functions.name();
+			break;
+			
+		default : return;
+	};	
+
+};
+	
+	myFunc( 'Ann', 21, false );
+	myFunc( 'Bob', 31 );
+	myFunc( 'Carol', true );
+	myFunc( 'Darrell' );
+
+</script>
